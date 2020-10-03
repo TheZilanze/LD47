@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 signal dead
 
+const SOUND_AREA = preload("res://scenes/sound_area.tscn")
+
 export(float) var speed = 128
 
 onready var ray_cast_2d = $ray_cast_2d
@@ -39,6 +41,11 @@ func _physics_process(delta):
 
 
 func fire():
+	# Spawn sound area
+	var sa = SOUND_AREA.instance()
+	get_tree().root.add_child(sa)
+	sa.position = global_position
+	
 	# Update the raycast
 	ray_cast_2d.force_raycast_update()
 	

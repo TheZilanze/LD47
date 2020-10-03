@@ -9,10 +9,10 @@ extents = Vector2( 128, 32 )
 [node name="main" type="Node"]
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 463, 321 )
+position = Vector2( 282, 290 )
 
 [node name="enemy" parent="." instance=ExtResource( 1 )]
-position = Vector2( 117, 124 )
+position = Vector2( 469, 157 )
 
 [node name="static_body_2d" type="StaticBody2D" parent="."]
 
