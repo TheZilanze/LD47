@@ -24,26 +24,26 @@ func _process(delta):
 
 
 func _draw():
-	# Actor
+	# Draws the actor
 	draw_circle(Vector2.ZERO, 32, Color(0, 1, 0, 0.5) if is_alive else Color(1, 0, 0, 0.5))
 	draw_arc(Vector2.ZERO, 32, 0, PI * 2, 32, Color.green if is_alive else Color.red, 2.0, true)
-	# Aim
+	# Draws where the actor is aiming
 	draw_line(Vector2.ZERO, Vector2.RIGHT * 32, Color.green if is_alive else Color.red, 2.0, true)
 
 
 func _physics_process(delta):
+	# Only update if we are still alive
 	if is_alive:
 		# Move
 		velocity = move_and_slide(velocity)
 
 
 func fire():
-	print("Fire!")
 	# Update the raycast
 	ray_cast_2d.force_raycast_update()
 	
+	# Check if we hit something
 	if ray_cast_2d.is_colliding():
-		print("Hit!")
 		ray_cast_2d.get_collider().die()
 
 
