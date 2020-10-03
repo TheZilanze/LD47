@@ -11,3 +11,5 @@ script = ExtResource( 2 )
 
 [node name="ray_cast_2d" parent="." index="1"]
 collision_mask = 2
+
+[node name="patrol" type="Node" parent="." index="2"]

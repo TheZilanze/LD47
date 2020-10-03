@@ -57,4 +57,5 @@ func fire():
 func die():
 	if is_alive:
 		is_alive = false
+		set_physics_process(false)
 		emit_signal("dead")
