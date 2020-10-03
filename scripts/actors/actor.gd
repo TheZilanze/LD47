@@ -1,9 +1,14 @@
 extends KinematicBody2D
 
+signal dead
+
 export(float) var speed = 128
 
+onready var ray_cast_2d = $ray_cast_2d
+
 var aiming = Vector2(1, 0) setget set_aiming
-var velocity = Vector2()
+var velocity = Vector2(128, 0)
+var is_alive = true
 
 
 # Set aiming
@@ -11,7 +16,7 @@ func set_aiming(value):
 	if value.length_squared() <= 0.001:
 		return
 	aiming = value.normalized()
-	look_at(to_global(aiming))
+	look_at(global_position + aiming)
 
 
 func _process(delta):
@@ -19,12 +24,30 @@ func _process(delta):
 
 
 func _draw():
-	#...
-	draw_arc(Vector2.ZERO, 32, 0, PI * 2, 32, Color.green, 2.0, true)
-	# Aiming
-	draw_line(Vector2.ZERO, aiming * 32, Color.green, 2.0, true)
+	# Actor
+	draw_circle(Vector2.ZERO, 32, Color(0, 1, 0, 0.5) if is_alive else Color(1, 0, 0, 0.5))
+	draw_arc(Vector2.ZERO, 32, 0, PI * 2, 32, Color.green if is_alive else Color.red, 2.0, true)
+	# Aim
+	draw_line(Vector2.ZERO, Vector2.RIGHT * 32, Color.green if is_alive else Color.red, 2.0, true)
 
 
 func _physics_process(delta):
-	# Move
-	velocity = move_and_slide(velocity)
+	if is_alive:
+		# Move
+		velocity = move_and_slide(velocity)
+
+
+func fire():
+	print("Fire!")
+	# Update the raycast
+	ray_cast_2d.force_raycast_update()
+	
+	if ray_cast_2d.is_colliding():
+		print("Hit!")
+		ray_cast_2d.get_collider().die()
+
+
+func die():
+	if is_alive:
+		is_alive = false
+		emit_signal("dead")
