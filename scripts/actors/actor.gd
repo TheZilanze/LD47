@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal dead
 
 const SOUND_AREA = preload("res://scenes/sound_area.tscn")
+const LASER = preload("res://scenes/laser.tscn")
 
 export(float) var speed = 128
 
@@ -51,6 +52,12 @@ func fire():
 	var result = space_state.intersect_ray(global_position, global_position + aiming * 5000, [self])
 	
 	if result:
+		# Laser
+		var laser = LASER.instance()
+		get_tree().root.add_child(laser)
+		laser.init(global_position + aiming * 48, result['position'])
+		
+		# Kill?
 		if result['collider'].has_method("die"):
 			result['collider'].die()
 
