@@ -1,5 +1,7 @@
 extends Area2D
 
+signal teleport
+
 onready var teleport_target = $node/teleport_target
 
 
@@ -12,3 +14,4 @@ func on_body_entered(body):
 	# Teleport
 	var to_body = body.global_position - global_position
 	body.global_position = teleport_target.global_position + to_body
+	emit_signal("teleport")

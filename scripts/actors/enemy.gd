@@ -106,3 +106,14 @@ func in_line_of_sight(target):
 func assign_point_of_interest(point_of_interest):
 	is_patrolling = false
 	path = get_nav_path(point_of_interest)
+
+
+func reset():
+	.reset()
+	patrol_index = 1
+	# Move the player to the first patrol point (if one exists)
+	if not patrol.empty():
+		global_position = patrol[0]
+		# Add the next patrol position to the path (if one exits)
+		if patrol.size() > patrol_index:
+			path = get_nav_path(patrol[patrol_index])

@@ -2,7 +2,9 @@
 
 [ext_resource path="res://scripts/teleport.gd" type="Script" id=1]
 
-[node name="teleport" type="Area2D"]
+[node name="teleport" type="Area2D" groups=[
+"teleport",
+]]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 1 )

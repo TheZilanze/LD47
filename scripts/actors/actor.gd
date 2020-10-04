@@ -59,3 +59,9 @@ func die():
 		is_alive = false
 		set_physics_process(false)
 		emit_signal("dead")
+
+
+func reset():
+	
+	is_alive = true
+	set_physics_process(true)

@@ -1,9 +1,11 @@
 extends "res://scripts/actors/actor.gd"
 
+var initial_position
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	initial_position = global_position
 
 
 func _physics_process(delta):
@@ -21,3 +23,8 @@ func _physics_process(delta):
 
 func get_axis_strength(positive, negative):
 	return Input.get_action_strength(positive) - Input.get_action_strength(negative)
+
+
+func reset():
+	.reset()
+	global_position = initial_position
