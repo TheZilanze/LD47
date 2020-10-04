@@ -7,7 +7,10 @@ const winning_kill_order = [
 	"enemy-2",
 ]
 
+export(NodePath) var fade_path
+
 onready var player = $player
+onready var fade = get_node(fade_path)
 
 var enemies = []
 var kill_order = []
@@ -41,16 +44,20 @@ func reset_enemies():
 func on_teleport():
 	if kill_order.size() == winning_kill_order.size():
 		if kill_order == winning_kill_order:
+			fade.fade_out()
+			yield(get_tree().create_timer(0.5), "timeout")
 			get_tree().change_scene("res://scenes/gui/victory.tscn")
 		else:
 			reset_enemies()
 
 
 func on_player_dead():
-	yield(get_tree().create_timer(1.0), "timeout")
+	#yield(get_tree().create_timer(0.25), "timeout")
+	fade.fade_out_in()
+	yield(get_tree().create_timer(0.5), "timeout")
 	#...
-	reset_player()
 	reset_enemies()
+	reset_player()
 
 
 func on_enemy_dead(enemy):

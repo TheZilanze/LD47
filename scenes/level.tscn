@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://tile_sets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/actors/player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://gui/fonts/font_regular.tres" type="DynamicFont" id=7]
 [ext_resource path="res://gui/fonts/font_big.tres" type="DynamicFont" id=8]
 [ext_resource path="res://scripts/gui/pause.gd" type="Script" id=9]
+[ext_resource path="res://scripts/gui/fade.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 96 )
@@ -51,12 +52,61 @@ vertices = PoolVector2Array( 576, 2368, 576, 1632, 704, 1632, 704, 2496, 288, 24
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 3, 4, 5 ), PoolIntArray( 6, 5, 4, 7 ) ]
 outlines = [ PoolVector2Array( 576, 1632, 704, 1632, 704, 2496, 288, 2496, 288, 3200, 160, 3200, 160, 2368, 576, 2368 ) ]
 
+[sub_resource type="Animation" id=11]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.133333, 0.133333, 0.133333, 1 ), Color( 0.133333, 0.133333, 0.133333, 0 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.133333, 0.133333, 0.133333, 0 ), Color( 0.133333, 0.133333, 0.133333, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "fade_out_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.133333, 0.133333, 0.133333, 0 ), Color( 0.133333, 0.133333, 0.133333, 1 ), Color( 0.133333, 0.133333, 0.133333, 0 ) ]
+}
+
 [node name="level" type="Node"]
 
 [node name="world" type="Node2D" parent="."]
 script = ExtResource( 6 )
+fade_path = NodePath("../canvas_layer/gui/fade")
 
 [node name="tile_map" type="TileMap" parent="world"]
+modulate = Color( 0.866667, 0.866667, 0.866667, 1 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -240,6 +290,21 @@ margin_right = 204.0
 margin_bottom = 212.0
 custom_fonts/font = ExtResource( 7 )
 text = "BACK TO MENU"
+
+[node name="fade" type="Panel" parent="canvas_layer/gui"]
+modulate = Color( 0.133333, 0.133333, 0.133333, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animation_player" type="AnimationPlayer" parent="canvas_layer/gui/fade"]
+anims/fade_in = SubResource( 11 )
+anims/fade_out = SubResource( 13 )
+anims/fade_out_in = SubResource( 12 )
 [connection signal="pressed" from="canvas_layer/gui/pause/center_container/v_box_container/button_resume" to="canvas_layer/gui/pause" method="_on_button_resume_pressed"]
 [connection signal="pressed" from="canvas_layer/gui/pause/center_container/v_box_container/button_back_to_menu" to="canvas_layer/gui/pause" method="_on_button_back_to_menu_pressed"]
 

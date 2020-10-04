@@ -12,6 +12,8 @@ var patrol = []
 var patrol_index = 1
 var is_patrolling = true
 
+var fire_timer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,14 +34,19 @@ func _ready():
 		# Add the next patrol position to the path (if one exits)
 		if patrol.size() > patrol_index:
 			path = get_nav_path(patrol[patrol_index])
+	
+	
+	fire_timer = Timer.new()
+	add_child(fire_timer)
+	fire_timer.one_shot = true
 
-
+"""
 func _draw():
 	for i in path.size():
 		var start = Vector2() if i == 0 else to_local(path[i - 1])
 		var end = to_local(path[i])
 		draw_line(start, end, Color.blue, 2.0, true)
-
+"""
 
 func _physics_process(delta):
 	# See player, fire at player
@@ -76,6 +83,14 @@ func _physics_process(delta):
 	velocity = seek(path[0])
 
 
+func fire():
+	if fire_timer.is_stopped():
+		fire_timer.start(0.25)
+		yield(fire_timer, "timeout")
+		if is_alive:
+			.fire()
+
+
 # Returns a path from the actors position to a 'target_position'
 func get_nav_path(target_position):
 	var path = nav_mesh.get_simple_path(global_position, target_position, true)
@@ -110,6 +125,7 @@ func assign_point_of_interest(point_of_interest):
 
 func reset():
 	.reset()
+	fire_timer.stop()
 	patrol_index = 1
 	# Move the player to the first patrol point (if one exists)
 	if not patrol.empty():

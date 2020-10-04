@@ -28,10 +28,10 @@ func _process(delta):
 
 func _draw():
 	# Draws the actor
-	draw_circle(Vector2.ZERO, 32, Color(0, 1, 0, 0.5) if is_alive else Color(1, 0, 0, 0.5))
-	draw_arc(Vector2.ZERO, 32, 0, PI * 2, 32, Color.green if is_alive else Color.red, 2.0, true)
+	draw_circle(Vector2.ZERO, 32, Color(0, 0.8, 0, 0.5) if is_alive else Color(0.8, 0, 0, 0.5))
+	draw_arc(Vector2.ZERO, 32, 0, PI * 2, 32, Color(0, 0.8, 0) if is_alive else Color(0.8, 0, 0), 2.0, true)
 	# Draws where the actor is aiming
-	draw_line(Vector2.ZERO, Vector2.RIGHT * 32, Color.green if is_alive else Color.red, 2.0, true)
+	draw_line(Vector2.ZERO, Vector2.RIGHT * 32, Color(0, 0.8, 0) if is_alive else Color(0.8, 0, 0), 2.0, true)
 
 
 func _physics_process(delta):
@@ -70,6 +70,5 @@ func die():
 
 
 func reset():
-	
 	is_alive = true
 	set_physics_process(true)

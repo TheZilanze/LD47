@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/sound_area.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 256.0
+radius = 0.01
 
 [node name="sound_area" type="Area2D"]
 script = ExtResource( 1 )
