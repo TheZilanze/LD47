@@ -48,5 +48,7 @@ margin_right = 342.0
 margin_bottom = 206.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_hover = Color( 0, 0.784314, 0, 1 )
 text = "Back to menu"
+flat = true
 [connection signal="pressed" from="center_container/v_box_container/button_back_to_menu" to="." method="_on_button_back_to_menu_pressed"]

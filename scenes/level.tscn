@@ -262,10 +262,10 @@ __meta__ = {
 }
 
 [node name="v_box_container" type="VBoxContainer" parent="canvas_layer/gui/pause/center_container"]
-margin_left = 858.0
-margin_top = 434.0
-margin_right = 1062.0
-margin_bottom = 646.0
+margin_left = 538.0
+margin_top = 254.0
+margin_right = 742.0
+margin_bottom = 466.0
 custom_constants/separation = 20
 
 [node name="label" type="Label" parent="canvas_layer/gui/pause/center_container/v_box_container"]
@@ -282,14 +282,18 @@ margin_top = 100.0
 margin_right = 204.0
 margin_bottom = 146.0
 custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color_hover = Color( 0, 0.784314, 0, 1 )
 text = "RESUME"
+flat = true
 
 [node name="button_back_to_menu" type="Button" parent="canvas_layer/gui/pause/center_container/v_box_container"]
 margin_top = 166.0
 margin_right = 204.0
 margin_bottom = 212.0
 custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color_hover = Color( 0, 0.784314, 0, 1 )
 text = "BACK TO MENU"
+flat = true
 
 [node name="fade" type="Panel" parent="canvas_layer/gui"]
 modulate = Color( 0.133333, 0.133333, 0.133333, 0 )

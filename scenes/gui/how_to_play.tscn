@@ -31,6 +31,8 @@ margin_right = 560.0
 margin_bottom = 80.0
 custom_fonts/font = ExtResource( 1 )
 text = "HOW TO PLAY"
+align = 1
+valign = 1
 
 [node name="label_instructions" type="Label" parent="center_container/v_box_container"]
 margin_top = 120.0
@@ -40,11 +42,15 @@ custom_fonts/font = ExtResource( 2 )
 text = "Move with W, A, S, D or arrow keys.
 Aim with mouse.
 Fire with left mouse button."
+align = 1
+valign = 1
 
 [node name="button_back" type="Button" parent="center_container/v_box_container"]
 margin_top = 286.0
 margin_right = 560.0
 margin_bottom = 332.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 0, 0.784314, 0, 1 )
 text = "BACK"
+flat = true
 [connection signal="pressed" from="center_container/v_box_container/button_back" to="." method="_on_button_back_pressed"]
