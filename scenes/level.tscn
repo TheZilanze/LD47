@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://tile_sets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/actors/player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://scenes/teleport.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/actors/enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/game_manager.gd" type="Script" id=6]
+[ext_resource path="res://gui/fonts/font_regular.tres" type="DynamicFont" id=7]
+[ext_resource path="res://gui/fonts/font_big.tres" type="DynamicFont" id=8]
+[ext_resource path="res://scripts/gui/pause.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 96 )
@@ -174,6 +177,71 @@ position = Vector2( 512, 352 )
 
 [node name="position_2d-6" type="Position2D" parent="world/enemy-4/patrol" index="5"]
 position = Vector2( 96, 352 )
+
+[node name="canvas_layer" type="CanvasLayer" parent="."]
+
+[node name="gui" type="Control" parent="canvas_layer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pause" type="Control" parent="canvas_layer/gui"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="panel" type="Panel" parent="canvas_layer/gui/pause"]
+modulate = Color( 0.392157, 0.392157, 0.392157, 0.607843 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center_container" type="CenterContainer" parent="canvas_layer/gui/pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v_box_container" type="VBoxContainer" parent="canvas_layer/gui/pause/center_container"]
+margin_left = 858.0
+margin_top = 434.0
+margin_right = 1062.0
+margin_bottom = 646.0
+custom_constants/separation = 20
+
+[node name="label" type="Label" parent="canvas_layer/gui/pause/center_container/v_box_container"]
+margin_right = 204.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 8 )
+text = "PAUSED"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button_resume" type="Button" parent="canvas_layer/gui/pause/center_container/v_box_container"]
+margin_top = 100.0
+margin_right = 204.0
+margin_bottom = 146.0
+custom_fonts/font = ExtResource( 7 )
+text = "RESUME"
+
+[node name="button_back_to_menu" type="Button" parent="canvas_layer/gui/pause/center_container/v_box_container"]
+margin_top = 166.0
+margin_right = 204.0
+margin_bottom = 212.0
+custom_fonts/font = ExtResource( 7 )
+text = "BACK TO MENU"
+[connection signal="pressed" from="canvas_layer/gui/pause/center_container/v_box_container/button_resume" to="canvas_layer/gui/pause" method="_on_button_resume_pressed"]
+[connection signal="pressed" from="canvas_layer/gui/pause/center_container/v_box_container/button_back_to_menu" to="canvas_layer/gui/pause" method="_on_button_back_to_menu_pressed"]
 
 [editable path="world/teleport_north"]
 

@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://gui/fonts/font_big.tres" type="DynamicFont" id=1]
+[ext_resource path="res://gui/fonts/font_regular.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/gui/how_to_play.gd" type="Script" id=3]
+
+[node name="how_to_play" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center_container" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v_box_container" type="VBoxContainer" parent="center_container"]
+margin_left = 680.0
+margin_top = 374.0
+margin_right = 1240.0
+margin_bottom = 706.0
+custom_constants/separation = 40
+
+[node name="label" type="Label" parent="center_container/v_box_container"]
+margin_right = 560.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 1 )
+text = "HOW TO PLAY"
+
+[node name="label_instructions" type="Label" parent="center_container/v_box_container"]
+margin_top = 120.0
+margin_right = 560.0
+margin_bottom = 246.0
+custom_fonts/font = ExtResource( 2 )
+text = "Move with W, A, S, D or arrow keys.
+Aim with mouse.
+Fire with left mouse button."
+
+[node name="button_back" type="Button" parent="center_container/v_box_container"]
+margin_top = 286.0
+margin_right = 560.0
+margin_bottom = 332.0
+custom_fonts/font = ExtResource( 2 )
+text = "BACK"
+[connection signal="pressed" from="center_container/v_box_container/button_back" to="." method="_on_button_back_pressed"]

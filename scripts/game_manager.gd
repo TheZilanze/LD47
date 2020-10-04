@@ -41,8 +41,7 @@ func reset_enemies():
 func on_teleport():
 	if kill_order.size() == winning_kill_order.size():
 		if kill_order == winning_kill_order:
-			print("Win!")
-			# TODO: Enter win screen...
+			get_tree().change_scene("res://scenes/gui/victory.tscn")
 		else:
 			reset_enemies()
 

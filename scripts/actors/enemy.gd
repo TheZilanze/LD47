@@ -1,6 +1,6 @@
 extends "res://scripts/actors/actor.gd"
 
-export(float, 0, 360) var fov = 180
+export(float, 0, 360) var fov = 160
 
 var player = null
 var path = []
