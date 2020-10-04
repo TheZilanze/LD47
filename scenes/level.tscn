@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://tile_sets/walls.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/actors/player.tscn" type="PackedScene" id=2]
@@ -28,10 +28,15 @@ vertices = PoolVector2Array( 64, 480, 384, 480, 384, 544, 384, 736, 384, 960, 38
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ) ]
 outlines = [ PoolVector2Array( 64, 480, 384, 480, 384, 544, 384, 736, 384, 960, 384, 1152, 384, 1376, 384, 1568, 384, 1632, 64, 1632 ) ]
 
-[sub_resource type="NavigationPolygon" id=6]
-vertices = PoolVector2Array( 64, 384, 64, 64, 160, 64, 480, 384, 288, 64, 800, 64, 800, 800, 480, 544, 480, 800, 480, 736, 384, 736, 384, 544 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4 ), PoolIntArray( 3, 4, 5, 6 ), PoolIntArray( 7, 3, 6 ), PoolIntArray( 6, 8, 9 ), PoolIntArray( 7, 6, 9 ), PoolIntArray( 7, 9, 10, 11 ) ]
-outlines = [ PoolVector2Array( 64, 64, 160, 64, 288, 64, 800, 64, 800, 800, 480, 800, 480, 736, 384, 736, 384, 544, 480, 544, 480, 384, 64, 384 ) ]
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( 480, 544, 480, 384, 800, 384, 800, 800, 480, 800, 480, 736, 384, 736, 384, 544 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 4, 5 ), PoolIntArray( 0, 3, 5 ), PoolIntArray( 0, 5, 6, 7 ) ]
+outlines = [ PoolVector2Array( 480, 384, 800, 384, 800, 800, 480, 800, 480, 736, 384, 736, 384, 544, 480, 544 ) ]
+
+[sub_resource type="NavigationPolygon" id=10]
+vertices = PoolVector2Array( 64, 64, 160, 64, 288, 64, 800, 64, 800, 384, 480, 384, 64, 384 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6 ) ]
+outlines = [ PoolVector2Array( 64, 64, 160, 64, 288, 64, 800, 64, 800, 384, 480, 384, 64, 384 ) ]
 
 [sub_resource type="NavigationPolygon" id=7]
 vertices = PoolVector2Array( 288, 64, 160, 64, 160, -800, 288, -672, 576, -800, 704, -672, 704, -1504, 576, -1504 )
@@ -88,8 +93,11 @@ navpoly = SubResource( 4 )
 [node name="long_room" type="NavigationPolygonInstance" parent="world/navigation_2d"]
 navpoly = SubResource( 5 )
 
-[node name="last_room" type="NavigationPolygonInstance" parent="world/navigation_2d"]
-navpoly = SubResource( 6 )
+[node name="last_room_1" type="NavigationPolygonInstance" parent="world/navigation_2d"]
+navpoly = SubResource( 9 )
+
+[node name="last_room_2" type="NavigationPolygonInstance" parent="world/navigation_2d"]
+navpoly = SubResource( 10 )
 
 [node name="corridor_top" type="NavigationPolygonInstance" parent="world/navigation_2d"]
 navpoly = SubResource( 7 )
@@ -153,7 +161,7 @@ position = Vector2( 640, 1472 )
 position = Vector2( 96, 96 )
 
 [node name="position_2d-2" type="Position2D" parent="world/enemy-4/patrol" index="1"]
-position = Vector2( 704, 160 )
+position = Vector2( 768, 96 )
 
 [node name="position_2d-3" type="Position2D" parent="world/enemy-4/patrol" index="2"]
 position = Vector2( 768, 768 )
@@ -162,10 +170,10 @@ position = Vector2( 768, 768 )
 position = Vector2( 512, 768 )
 
 [node name="position_2d-5" type="Position2D" parent="world/enemy-4/patrol" index="4"]
-position = Vector2( 544, 288 )
+position = Vector2( 512, 352 )
 
 [node name="position_2d-6" type="Position2D" parent="world/enemy-4/patrol" index="5"]
-position = Vector2( 128, 256 )
+position = Vector2( 96, 352 )
 
 [editable path="world/teleport_north"]
 
