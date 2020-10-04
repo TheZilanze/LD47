@@ -46,12 +46,13 @@ func fire():
 	get_tree().root.add_child(sa)
 	sa.position = global_position
 	
-	# Update the raycast
-	ray_cast_2d.force_raycast_update()
+	#...
+	var space_state = get_world_2d().direct_space_state
+	var result = space_state.intersect_ray(global_position, global_position + aiming * 5000, [self])
 	
-	# Check if we hit something
-	if ray_cast_2d.is_colliding():
-		ray_cast_2d.get_collider().die()
+	if result:
+		if result['collider'].has_method("die"):
+			result['collider'].die()
 
 
 func die():

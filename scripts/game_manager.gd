@@ -44,7 +44,6 @@ func on_teleport():
 			print("Win!")
 			# TODO: Enter win screen...
 		else:
-			print("Try again!")
 			reset_enemies()
 
 
@@ -56,6 +55,4 @@ func on_player_dead():
 
 
 func on_enemy_dead(enemy):
-	print(enemy.name)
 	kill_order.append(enemy.name)
-	
